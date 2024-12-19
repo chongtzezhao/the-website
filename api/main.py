@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from mangum import Mangum  # Mangum is an ASGI adapter for AWS Lambda
 
 # Import the routers
 from api.router.auth import router as auth_router
@@ -12,6 +13,9 @@ app = FastAPI(docs_url="/api/docs", openapi_url="/api/openapi.json")
 # Attach the routers to the app
 app.include_router(auth_router)
 app.include_router(tutor_router)
+
+# Create the handler for the Lambda function
+handler = Mangum(app)
 
 StorageService.init_db()
 
