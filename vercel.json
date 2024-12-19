@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "functions": {
+    "api/**/*": {
+      "includeFiles": "api/**",
+      "excludeFiles": "api/__pycache__/**"
+    }
+  }
+}
