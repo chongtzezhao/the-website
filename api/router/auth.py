@@ -1,7 +1,7 @@
 from fastapi import Depends, Request, Response, APIRouter
 
-from api.router.models import LoginRequest
-from api.router.models import SignupRequest
+from api.common.models import LoginRequest
+from api.common.models import SignupRequest
 
 from api.logic.logic import Logic
 

@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 from fastapi import HTTPException
 from api.auth.models import TokenData
 from api.logic.logic import Logic
-from api.router.models import LoginRequest, SignupRequest
+from api.common.models import LoginRequest, SignupRequest
 from api.exceptions import UserAlreadyExistsError, UserNotFoundError
 from api.storage.models import UserType
 from api.auth.config import ACCESS_TOKEN_EXPIRE_MINUTES
