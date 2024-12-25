@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from mangum import Mangum
 
 # Import the routers
 from api.router.auth import router as auth_router
@@ -18,6 +19,8 @@ def read_root():
   return {"Hello": "World"}
 
 StorageService.init_db()
+
+handler = Mangum(app)
 
 if __name__ == "__main__":
   import uvicorn
