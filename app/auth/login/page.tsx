@@ -6,7 +6,8 @@ import { Inter } from 'next/font/google'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-
+import { config } from "../../components/config"
+import { apiClient } from "../../components/apiClient"
 import { useRouter } from 'next/navigation'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -20,30 +21,34 @@ export default function LoginPage() {
   const [userType, setUserType] = useState('tutee')
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-
-    console.log('Login attempted with:', { email, password, userType })
-
-    console.log('Sending login request...')
-    
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password, userType: userType.toUpperCase() })
-    })
-
-    console.log('Login response:', res)
-
-    // if status code 401, show error message
-    if (res.status === 401) {
-      alert('Invalid email or password')
-      return
+    e.preventDefault();
+  
+    console.log("Login attempted with:", { email, password, userType });
+  
+    if (config.useMock) {
+      console.log("[MOCK MODE] Simulating login...");
+      router.push("/dashboard/[userType]");
+      return;
     }
-
-    // if successful, redirect to protected page
-    router.push('/protected')
-  }
-
+  
+    // Actual API call
+    const res = await apiClient.post(`${config.BASE_URL}/api/auth/login`, {
+      email,
+      password,
+      userType: userType.toUpperCase(),
+    });
+  
+    if (res.status === 200) {
+      console.log("Login successful!");
+      router.push("/dashboard");
+    } else if (res.status === 401) {
+      alert("Invalid email or password");
+    } else {
+      console.error("Login failed");
+      alert("Something went wrong");
+    }
+  };
+  
   return (
     <div className={`min-h-screen bg-[#fff2de] flex flex-col items-center justify-center px-4 ${inter.className}`}>
       <motion.div

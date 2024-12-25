@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion'
 import { Inter } from 'next/font/google'
+import { config } from "../components/config"
+import { apiClient } from "../components/apiClient"
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -15,49 +17,43 @@ export default function ProtectedPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  // Simulating a function to check if the user is authenticated
   useEffect(() => {
     const checkAuth = async () => {
+      const token = localStorage.getItem("auth");
+  
+      if (config.useMock) {
+        if (token) {
+          console.log("[MOCK MODE] Authenticated");
+          setIsAuthenticated(true);
+        } else {
+          router.push('/auth/login');
+        }
+        setLoading(false);
+        return;
+      }
+  
       try {
-        // Make a request to check the user's authentication status (could be a token validation call)
         const res = await fetch('/api/protected', {
           method: 'GET',
-        })
-        
+          headers: { Authorization: `Bearer ${token}` },
+        });
+  
         if (res.status === 200) {
-          setIsAuthenticated(true)
-          return
+          setIsAuthenticated(true);
+        } else {
+          router.push('/auth/login');
         }
-
-        const ref = await fetch('/api/auth/refresh', {
-          method: 'POST'
-        })
-
-        if (ref.status === 200) {
-          setIsAuthenticated(true)
-          return
-        }
-
-        setIsAuthenticated(false)
-        setError('You are not logged in or your session has expired.')
-        alert('Bye bye')
-        
-      } catch (err) {
-        setError('Error checking authentication.')
+      } catch (error) {
+        console.error("Error during authentication check:", error);
+        router.push('/auth/login');
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
-
-    checkAuth()
-  }, [])
-
-  // If the user is not authenticated, redirect them to the login page
-  if (!loading && !isAuthenticated) {
-    setTimeout(() => router.push('/login'), 5000)
-    return null
-  }
-
+    };
+  
+    checkAuth();
+  }, [router]);
+  
   return (
     <div className={`min-h-screen bg-[#fff2de] flex flex-col items-center justify-center px-4 ${inter.className}`}>
       <motion.div
