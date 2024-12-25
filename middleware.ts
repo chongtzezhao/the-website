@@ -6,8 +6,6 @@ import { NextResponse } from 'next/server';
 export function middleware(request: NextRequest) {
   const token = request.cookies.get('access_token');
 
-  console.log("ENVIRONMENT: " + process.env.NODE_ENV);
-
   // No token? Redirect to login
   if (!token) {
     return NextResponse.redirect(new URL('/login', request.url));
