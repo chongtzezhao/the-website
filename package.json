@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "fastapi-dev": "pip3 install -r requirements.txt && python3 -m uvicorn api.main:app --reload",
-    "next-dev": "next dev",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -33,5 +32,8 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
