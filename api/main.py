@@ -13,6 +13,8 @@ app = FastAPI(docs_url="/api/docs", openapi_url="/api/openapi.json")
 app.include_router(auth_router)
 app.include_router(tutor_router)
 
+@app.get("/api/")
+
 StorageService.init_db()
 
 if __name__ == "__main__":
