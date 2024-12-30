@@ -18,7 +18,7 @@ export default function SignupPage() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')  // New state for password confirmation
+  const [confirmPassword, setConfirmPassword] = useState('')  
   const [showPassword, setShowPassword] = useState(false)
   const [userType, setUserType] = useState('Select Role')
   const [isOpen, setIsOpen] = useState(false)
@@ -63,13 +63,13 @@ export default function SignupPage() {
         <div className="flex justify-center mb-6">
           <Image
             src=""
-            alt="T.H.E. Logo"
+            alt="THE Logo"
             width={150}
             height={75}
             className="w-32 sm:w-40"
           />
         </div>
-        <h2 className="text-2xl font-bold mb-6 text-[#4a58b5] text-center">Sign Up for T.H.E.</h2>
+        <h2 className="text-2xl font-bold mb-6 text-[#4a58b5] text-center">Sign Up for THE</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="name" className="block text-sm font-medium text-[#4a58b5] mb-1">Name</label>

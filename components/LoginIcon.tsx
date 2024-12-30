@@ -71,13 +71,13 @@ const LoginIcon = () => {
             ) : (
               <>
                 <Link
-                  href="/login"
+                  href="/auth/login"
                   className="block px-4 py-2 text-sm text-[#4a58b5] hover:bg-[#fabb84] hover:text-white"
                 >
                   Log In
                 </Link>
                 <Link
-                  href="/signup"
+                  href="/auth/signup"
                   className="block px-4 py-2 text-sm text-[#4a58b5] hover:bg-[#fabb84] hover:text-white"
                 >
                   Sign Up

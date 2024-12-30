@@ -62,7 +62,7 @@ const UserMenu = () => {
               Profile
             </Link>
             
-            <Link href="/logout" className="block px-4 py-2 text-sm text-[#4a58b5] hover:bg-[#fabb84] hover:text-white">
+            <Link href="/auth/logout" className="block px-4 py-2 text-sm text-[#4a58b5] hover:bg-[#fabb84] hover:text-white">
               Log Out
             </Link>
           </motion.div>

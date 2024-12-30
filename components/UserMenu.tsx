@@ -54,7 +54,7 @@ const UserMenu = () => {
               Profile
             </button>
             <button
-              onClick={() => handleNavigation('/logout')}
+              onClick={() => handleNavigation('/auth/logout')}
               className="block w-full text-left px-4 py-2 text-sm text-[#4a58b5] hover:bg-[#fabb84] hover:text-white"
             >
               Log Out

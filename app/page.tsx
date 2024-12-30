@@ -13,7 +13,7 @@ export default function AppPage() {
   };
 
   const handleJoinUs = () => {
-    router.push('/signup');
+    router.push('/auth/signup');
   };
 
   return (
